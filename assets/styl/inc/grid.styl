@@ -1,0 +1,27 @@
+$jc = (start flex-start) (end flex-end) (center center) (between space-between) (around space-around)
+$ai = (start flex-start) (end flex-end) (center center) (stretch stretch)
+
+generate(prefix, values, property)
+  for val, key in keys(values)
+    {prefix}-{val}
+      {property}: values[key][1]
+
+body
+  display flex
+  flex-direction column
+  justify-content space-between
+  main
+    flex-grow 1
+
+.flex
+  display flex
+  &.column
+    flex-direction column
+  &.wrap
+    flex-wrap wrap
+  generate('&.jc', $jc, justify-content)
+  generate('&.ai', $ai, align-items)
+  .grow
+    flex-grow 1
+  .shrink
+    flex-shrink 0
